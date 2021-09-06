@@ -1,4 +1,4 @@
-public class HelloWorld{
+public class array{
     
     public static String dataset[] = {
         "Braund, Mr. Owen Harris",

@@ -99,7 +99,7 @@ public class DoubleLinkedList<T> {
             this.head = new Node<T>(addData);
             this.tail = this.head;
             return true;
-        } else if (this.head.data == existedData) {
+        } else if (this.head.data == existedData) { // 헤드앞에 넣었을때 기존 헤드를 밀어내고 새로운 헤드를 입력
             Node<T> newHead = new Node<T>(addData);
             newHead.next = this.head;
             this.head = newHead;
@@ -107,14 +107,14 @@ public class DoubleLinkedList<T> {
         } else {
             Node<T> node = this.head;
             while (node != null) {
-                if (node.data == existedData) {
-                    Node<T> nodePrev = node.prev;
+                if (node.data == existedData) { //기존에 1, 2가 있고 2 앞에 새로운 숫자를 넣는다고 하면
+                    Node<T> nodePrev = node.prev; //2의 앞은 1
                     
-                    nodePrev.next = new Node<T>(addData);
-                    nodePrev.next.next = node;
+                    nodePrev.next = new Node<T>(addData); //기존 1 다음에 새로운 데이터 입력 2  1->새로운2 연결
+                    nodePrev.next.next = node; // 기존 2->3 연결
                     
-                    nodePrev.next.prev = nodePrev;
-                    node.prev = nodePrev.next;
+                    nodePrev.next.prev = nodePrev; // 1<-새로운2 연결 
+                    node.prev = nodePrev.next; //2<-3 연결
                     return true;
                 } else {
                     node = node.next;

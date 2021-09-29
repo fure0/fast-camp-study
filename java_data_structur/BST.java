@@ -78,19 +78,20 @@ public class BST {
                 return true;
             }
 
+            // 삭제할 대상이 트리 안에 있는가 확인
             while (currNode != null) {
                 if (currNode.value == value) {
                     searched = true;
                     break;
                 } else if (value < currNode.value) {
                     currParentNode = currNode;
-                    currNode = currNode.left;
+                    currNode = currNode.left; // 삭제할 레벨까지 이동
                 } else {
                     currParentNode = currNode;
-                    currNode = currNode.right;
+                    currNode = currNode.right; // 삭제할 레벨까지 이동
                 }
             }
-
+            // 삭제할 대상이 트리 안에 없으면 종료
             if (searched == false) {
                 return false;
             }
@@ -99,31 +100,31 @@ public class BST {
         // Case1: 삭제할 Node가 Leaf Node인 경우
         if (currNode.left == null && currNode.right == null) {
             if (value < currParentNode.value) {
-                currParentNode.left = null;
-                currNode = null;
+                currParentNode.left = null; // 삭제될 노드의 부모 노드랑 연결 해제
+                currNode = null; // 해당 리프노드 삭제
             } else {
-                currParentNode.right = null;
-                currNode = null;
+                currParentNode.right = null; // 삭제될 노드의 부모 노드랑 연결 해제
+                currNode = null;  // 해당 리프노드 삭제
             }
             return true;
             // Case2: 삭제할 Node가 Child Node를 한 개 가지고 있을 경우 (왼쪽)
         } else if (currNode.left != null && currNode.right == null) {
             if (value < currParentNode.value) {
-                currParentNode.left = currNode.left;
-                currNode = null;
+                currParentNode.left = currNode.left; // 삭제 대상 자식노드랑 부모노드랑 연결
+                currNode = null; // 해당 노드 삭제
             } else {
-                currParentNode.right = currNode.left;
-                currNode = null;
+                currParentNode.right = currNode.left; // 삭제 대상 자식노드랑 부모노드랑 연결
+                currNode = null; // 해당 노드 삭제
             }
             return true;
             // Case2: 삭제할 Node가 Child Node를 한 개 가지고 있을 경우 (오쪽)
         } else if (currNode.left == null && currNode.right != null) {
             if (value < currParentNode.value) {
-                currParentNode.left = currNode.right;
-                currNode = null;
+                currParentNode.left = currNode.right; // 삭제 대상 자식노드랑 부모노드랑 연결
+                currNode = null; // 해당 노드 삭제
             } else {
-                currParentNode.right = currNode.right;
-                currNode = null;
+                currParentNode.right = currNode.right; // 삭제 대상 자식노드랑 부모노드랑 연결
+                currNode = null; // 해당 노드 삭제
             }
             return true;
             // Case3-1: 삭제할 Node가 Child Node를 두 개 가지고 있을 경우
@@ -133,7 +134,7 @@ public class BST {
             // 삭제할 Node가 Parent Node 왼쪽에 있을 때
             if (value < currParentNode.value) {
 
-                // 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 Node 찾기
+                // 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 Node 찾기 (CASE 3-1 그림보면 이해가 편함)
                 Node changeNode = currNode.right;
                 Node changeParentNode = currNode.right;
                 while (currNode.left != null) {
@@ -158,9 +159,9 @@ public class BST {
 
                 // 삭제할 Node 삭제!
                 currNode = null;
-                // 삭제할 Node가 Parent Node 오른쪽에 있을 때
+            // 삭제할 Node가 Parent Node 오른쪽에 있을 때
             } else {
-                // 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 Node 찾기
+                // 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 Node 찾기 (CASE 3-1 그림보면 이해가 편함)
                 Node changeNode = currNode.right;
                 Node changeParentNode = currNode.right;
                 while (changeNode.left != null) {

@@ -44,11 +44,12 @@ public class Heap {
         while (this.move_up(inserted_idx)) { //최후의 삽입된 값이 부모노드 값 보다 크면 스왑
             parent_idx = inserted_idx/2;
             Collections.swap(this.heapArray, inserted_idx, parent_idx);
-            inserted_idx = parent_idx;
+            inserted_idx = parent_idx; // 스왑하고 부모자리에서 다시 그 위의 부모와 비교한다
         }
         return true;
     }
 
+    // 부모노드 밑에 왼쪽이든 오른쪽이든 더 큰 값이 있으면 이동 시켜야 함을 알린다.
     public boolean move_down(Integer popped_idx) {
         Integer left_child_popped_idx, right_child_popped_idx;
 
@@ -83,6 +84,7 @@ public class Heap {
         }
     }
 
+    // 최상위 값을 빼내고 나머지 값중 가장 높은 값을 최상위에 둔다
     public Integer pop() {
         Integer returned_data, popped_idx, left_child_popped_idx, right_child_popped_idx;
 
@@ -91,8 +93,8 @@ public class Heap {
         }
 
         returned_data = this.heapArray.get(1); // 맨 위에 값 = 최대값
-        this.heapArray.set(1, this.heapArray.get(this.heapArray.size() - 1));
-        this.heapArray.remove(this.heapArray.size() - 1);
+        this.heapArray.set(1, this.heapArray.get(this.heapArray.size() - 1)); // 맨 마지막 값을 최상위에 셋
+        this.heapArray.remove(this.heapArray.size() - 1); // 맨 마지막 값 제거
         popped_idx = 1;
 
         while (this.move_down(popped_idx)) {
@@ -107,15 +109,16 @@ public class Heap {
                 }
             // CASE3: 왼쪽/오른쪽 자식 노드가 모두 있을 때 
             } else {
-                if (this.heapArray.get(left_child_popped_idx) > this.heapArray.get(right_child_popped_idx)) { //왼쪽 자식노드가 오른쪽 자식노드 보다 클 때
-                    if (this.heapArray.get(popped_idx) < this.heapArray.get(left_child_popped_idx)) { //왼쪽 자식 노드가 부모 노드보다 클 때
+                //왼쪽 자식노드가 오른쪽 자식노드 보다 클 때 *** 여기서 어디로 가느냐
+                if (this.heapArray.get(left_child_popped_idx) > this.heapArray.get(right_child_popped_idx)) { 
+                    if (this.heapArray.get(left_child_popped_idx) > this.heapArray.get(popped_idx)) { //왼쪽 자식 노드가 부모 노드보다 클 때
                         Collections.swap(this.heapArray, popped_idx, left_child_popped_idx); //왼쪽 자식 노드를 위로 (부모가 자식 보다 커야되서)
-                        popped_idx = left_child_popped_idx;
+                        popped_idx = left_child_popped_idx; // 왼쪽 밑으로 이동했다면 그 이동한 위치에서 다시 비교 대상으로
                     }
                 } else { //오른쪽 자식노드가 왼쪽 자식노드 보다 클 때
-                    if (this.heapArray.get(popped_idx) < this.heapArray.get(right_child_popped_idx)) {  //오른쪽 자식 노드가 부모 노드보다 클 때
+                    if (this.heapArray.get(right_child_popped_idx) > this.heapArray.get(popped_idx)) {  //오른쪽 자식 노드가 부모 노드보다 클 때
                         Collections.swap(this.heapArray, popped_idx, right_child_popped_idx); //오른쪽 자식 노드를 위로 (부모가 자식 보다 커야되서)
-                        popped_idx = right_child_popped_idx;
+                        popped_idx = right_child_popped_idx; // 오른쪽 밑으로 이동했다면 그 이동한 위치에서 다시 비교 대상으로
                     }
                 }
             }

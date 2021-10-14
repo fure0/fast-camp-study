@@ -1,28 +1,5 @@
 public class DoubleLinkedList<T> {
-    public static void main(String[] args) {
-        DoubleLinkedList<Integer> MyLinkedList = new DoubleLinkedList<Integer>();
-
-        MyLinkedList.addNode(1);
-        MyLinkedList.addNode(2);
-        MyLinkedList.addNode(3);
-        MyLinkedList.addNode(4);
-        MyLinkedList.addNode(5);
-        MyLinkedList.printAll();
-        System.out.println("----------------");
-
-        MyLinkedList.insertToFront(3, 2);
-        MyLinkedList.printAll();
-        System.out.println("----------------");
-
-        MyLinkedList.insertToFront(6, 2);
-        MyLinkedList.insertToFront(1, 0);
-        MyLinkedList.printAll();
-        System.out.println("----------------");
-
-        MyLinkedList.addNode(6);
-        MyLinkedList.printAll();
-    }
-
+    
     public Node<T> head = null;
     public Node<T> tail = null;
 
@@ -45,9 +22,9 @@ public class DoubleLinkedList<T> {
             while (node.next != null) {
                 node = node.next;
             }
-            node.next = new Node<T>(data);
-            node.next.prev = node;
-            this.tail = node.next;
+            node.next = new Node<T>(data); // 가장 마지막 노드 다음에 추가
+            node.next.prev = node; // 새로운 마지막 노드랑 이전 노드랑 연결
+            this.tail = node.next; // tail을 새로운 마지막 노드로 갱신
         }
     }
 
@@ -112,9 +89,10 @@ public class DoubleLinkedList<T> {
                     
                     nodePrev.next = new Node<T>(addData); //기존 1 다음에 새로운 데이터 입력 2  1->새로운2 연결
                     nodePrev.next.next = node; // 기존 2->3 연결
-                    
+                    // 여기까지는 1->new2->3 연결
                     nodePrev.next.prev = nodePrev; // 1<-새로운2 연결 
                     node.prev = nodePrev.next; //2<-3 연결
+                    // 여기까지는 1<-new2<-3 연결
                     return true;
                 } else {
                     node = node.next;
@@ -122,5 +100,29 @@ public class DoubleLinkedList<T> {
             }
             return false;
         }
+    }
+
+    public static void main(String[] args) {
+        DoubleLinkedList<Integer> MyLinkedList = new DoubleLinkedList<Integer>();
+
+        MyLinkedList.addNode(1);
+        MyLinkedList.addNode(2);
+        MyLinkedList.addNode(3);
+        MyLinkedList.addNode(4);
+        MyLinkedList.addNode(5);
+        MyLinkedList.printAll();
+        System.out.println("----------------");
+
+        MyLinkedList.insertToFront(3, 2);
+        MyLinkedList.printAll();
+        System.out.println("----------------");
+
+        MyLinkedList.insertToFront(6, 2);
+        MyLinkedList.insertToFront(1, 0);
+        MyLinkedList.printAll();
+        System.out.println("----------------");
+
+        MyLinkedList.addNode(6);
+        MyLinkedList.printAll();
     }
 }

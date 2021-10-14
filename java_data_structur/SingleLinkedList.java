@@ -15,10 +15,10 @@ public class SingleLinkedList<T> {
             head = new Node<T>(data);
         } else {
             Node<T> node = this.head;
-            while (node.next != null) {
+            while (node.next != null) { // next가 없을 때 까지 = 마지막 node까지 이동
                 node = node.next;
             }
-            node.next = new Node<T>(data);
+            node.next = new Node<T>(data); //마지막 노드의 다음에 새로운 노드 추가
         }
     }
 

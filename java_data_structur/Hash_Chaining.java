@@ -24,20 +24,21 @@ public class Hash_Chaining {
     public boolean saveData(String key, String value) {
         Integer address = this.hashFunc(key);
         System.out.println(address);
-        if (this.hashTable[address] != null) {
+        if (this.hashTable[address] != null) { //여기로 들오오는건 두번째 부터
             Slot findSlot = this.hashTable[address]; //DaveLee
             Slot prevSlot = this.hashTable[address]; //DaveLee
-            while (findSlot != null ) { //DaveLee
+            while (findSlot != null ) { //DaveLee David
                 if (findSlot.key == key) {
                     findSlot.value = value; //update data
                     return true;
                 } else {
-                    prevSlot = findSlot; //DaveLee
-                    findSlot = findSlot.next; //null David
+                    prevSlot = findSlot; //DaveLee David
+                    findSlot = findSlot.next; //null 
                 }
             }
+            // findSlot.next와 같다
             prevSlot.next = new Slot(key, value); //David
-        } else {
+        } else { //첫번째
             this.hashTable[address] = new Slot(key, value); //DaveLee
         }
         return true;

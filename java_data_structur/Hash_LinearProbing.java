@@ -31,9 +31,9 @@ public class Hash_LinearProbing {
                     if (this.hashTable[currAddress].key == key) {
                         this.hashTable[currAddress].value = value;
                         return true;
-                    } else {
+                    } else { //빈주소 까지 이동
                         currAddress++;
-                        if (currAddress >= this.hashTable.length) {
+                        if (currAddress >= this.hashTable.length) { //배열 길이 이상으로 할당 불가
                             return false;
                         }
                     }

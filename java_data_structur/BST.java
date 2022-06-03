@@ -135,23 +135,23 @@ public class BST {
             if (value < currParentNode.value) {
 
                 // 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 Node 찾기 (CASE 3-1 그림보면 이해가 편함)
-                Node changeNode = currNode.right;
-                Node changeParentNode = currNode.right;
+                Node changeNode = currNode.right; //18
+                Node changeParentNode = currNode.right; //18
                 while (currNode.left != null) {
-                    changeParentNode = currNode;
-                    changeNode = currNode.left;
+                    changeParentNode = currNode; //18
+                    changeNode = currNode.left; //16
                 }
                 // 여기까지 실행되면, changeNode 에는 삭제할 Node 의 오른쪽 자식 중, 가장 작은 값을 가진 Node 가 들어있음
 
-                if (changeNode.right != null) {
+                if (changeNode.right != null) { //17
                     // Case3-1-2: 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 Node의 오른쪽에 Child Node가 있을 때
-                    changeParentNode.left = changeNode.right;
+                    changeParentNode.left = changeNode.right; //18 -> 17
                 } else {
                     // Case3-1-1: 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 Node의 오른쪽에 Child Node가 없을 때
                     changeParentNode.left = null;
                 }
                 // parent Node 의 왼쪽 Child Node 에 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 changeNode 를 연결
-                currParentNode.left = changeNode;
+                currParentNode.left = changeNode; // 15-> 16
                 // parent Node 왼쪽 Child Node 인 changeNode 의 왼쪽/오른쪽 Child Node 를
                 // 모두 삭제할 currNode 의 기존 왼쪽/오른쪽 Node 로 변경
                 changeNode.right = currNode.right;
@@ -161,24 +161,24 @@ public class BST {
                 currNode = null;
             // 삭제할 Node가 Parent Node 오른쪽에 있을 때
             } else {
-                // 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 Node 찾기 (CASE 3-1 그림보면 이해가 편함)
-                Node changeNode = currNode.right;
-                Node changeParentNode = currNode.right;
+                // 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 Node 찾기 (CASE 3-2 그림보면 이해가 편함)
+                Node changeNode = currNode.right; //18
+                Node changeParentNode = currNode.right; //18
                 while (changeNode.left != null) {
-                    changeParentNode = changeNode;
-                    changeNode = changeNode.left;
+                    changeParentNode = changeNode; //18
+                    changeNode = changeNode.left; //16
                 }
 
                 if (changeNode.right != null) {
                     // Case3-2-2: 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 Node의 오른쪽에 Child Node가 있을 때
-                    changeParentNode.left = changeNode.right;
+                    changeParentNode.left = changeNode.right; //16 -> 17
                 } else {
                     // Case3-2-1: 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 Node의 오른쪽에 Child Node가 없을 때
                     changeParentNode.left = null;
                 }
 
                 // parent Node 의 오른쪽 Child Node 에 삭제할 Node의 오른쪽 자식 중, 가장 작은 값을 가진 changeNode 를 연결
-                currParentNode.right = changeNode;
+                currParentNode.right = changeNode; //15 -> 16
                 // parent Node 왼쪽 Child Node 인 changeNode 의 왼쪽/오른쪽 Child Node 를
                 // 모두 삭제할 currNode 의 기존 왼쪽/오른쪽 Node 로 변경
                 changeNode.right = currNode.right;

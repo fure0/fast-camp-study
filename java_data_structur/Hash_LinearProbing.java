@@ -21,6 +21,8 @@ public class Hash_LinearProbing {
 
     public boolean saveData(String key, String value) {
         Integer address = this.hashFunc(key);
+        System.out.println("key: "+ key);
+        System.out.println("address: "+ address);
         if (this.hashTable[address] != null) {
             if (this.hashTable[address].key == key) {
                 this.hashTable[address].value = value;
@@ -38,6 +40,7 @@ public class Hash_LinearProbing {
                         }
                     }
                 }
+                System.out.println("currAddress: "+ currAddress);
                 this.hashTable[currAddress] = new Slot(key, value);
                 return true;
             }

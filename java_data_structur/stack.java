@@ -14,6 +14,13 @@ public class stack<T> {
         return stack.remove(stack.size() -1);
     }
 
+    public T peek() {
+        if(stack.isEmpty()) {
+            return null;
+        }
+        return stack.get(stack.size() -1);
+    }
+
     public boolean isEmpty() {
         return stack.isEmpty();
     }
@@ -23,9 +30,16 @@ public class stack<T> {
         ms.push(1);
         ms.push(2);
         System.out.println(ms.pop());
+        System.out.println(ms.peek());
         ms.push(3);
         System.out.println(ms.pop());
         System.out.println(ms.pop());
     }
 
 }
+
+/*
+스택 메소드
+https://hbase.tistory.com/122
+
+*/

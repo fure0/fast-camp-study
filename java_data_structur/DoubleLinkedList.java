@@ -85,6 +85,7 @@ public class DoubleLinkedList<T> {
             Node<T> node = this.head;
             while (node != null) {
                 if (node.data == existedData) { //기존에 1, 2가 있고 2 앞에 새로운 숫자를 넣는다고 하면
+                    // 코드로 이해가 잘 안되면 그림으로 생각해서 1, 2, 3을 서로 연결한다고 생각하면 된다.
                     Node<T> nodePrev = node.prev; //2의 앞은 1
                     
                     nodePrev.next = new Node<T>(addData); //기존 1 다음에 새로운 데이터 입력 2  1->새로운2 연결
